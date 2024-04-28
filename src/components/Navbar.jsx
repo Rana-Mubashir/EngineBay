@@ -9,9 +9,9 @@ const Navbar = () => {
         <nav className="bg-gray-800 p-4 lg:p-8">
             <div className="flex justify-between items-center">
                 <div className="flex items-center gap-3 lg:gap-5">
-                    <a href="/" className="text-white text-lg lg:text-2xl font-bold">
+                    <p className="text-white text-lg lg:text-2xl font-bold">
                         EnGiNeBaY
-                    </a>
+                    </p>
                     <NavLink
                         to="/"
                         className={({ isActive }) =>
@@ -23,25 +23,49 @@ const Navbar = () => {
                 </div>
                 <div className="flex items-center gap-3 lg:gap-10">
                     <div className="relative">
-                        <Link to={user && cartQuantity ? "/cart" : ''} className="text-white">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-6 w-6 lg:h-8 lg:w-8"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M9 19c0 1.104.896 2 2 2s2-.896 2-2M5 5h14l2 10H3l2-10zm4 10V9m4 6V9"
-                                />
-                            </svg>
-                            <div className="bg-red-500 rounded-full text-center absolute -top-1 -left-1 lg:-top-2 lg:-left-2">
-                                <p className="text-sm px-1 lg:text-sm">{cartQuantity ? cartQuantity : 0}</p>
-                            </div>
-                        </Link>
+                        {
+                            
+                                user && cartQuantity ?
+                                <Link to="/cart" className="text-white">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="h-6 w-6 lg:h-8 lg:w-8"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M9 19c0 1.104.896 2 2 2s2-.896 2-2M5 5h14l2 10H3l2-10zm4 10V9m4 6V9"
+                                        />
+                                    </svg>
+                                    <div className="bg-red-500 rounded-full text-center absolute -top-1 -left-1 lg:-top-2 lg:-left-2">
+                                        <p className="text-sm px-1 lg:text-sm">{cartQuantity ? cartQuantity : 0}</p>
+                                    </div>
+                                </Link>
+                                :
+                                <div className='text-white'>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-6 w-6 lg:h-8 lg:w-8"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M9 19c0 1.104.896 2 2 2s2-.896 2-2M5 5h14l2 10H3l2-10zm4 10V9m4 6V9"
+                                    />
+                                </svg>
+                                <div className="bg-red-500 rounded-full text-center absolute -top-1 -left-1 lg:-top-2 lg:-left-2">
+                                    <p className="text-sm px-1 lg:text-sm">{cartQuantity ? cartQuantity : 0}</p>
+                                </div>
+                                </div>
+                        }
                     </div>
                     {user ? (
                         <LogoutBtn />
