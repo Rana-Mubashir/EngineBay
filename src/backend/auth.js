@@ -1,5 +1,5 @@
 import config from '../config/config'
-import { Client, Account,ID } from "appwrite";
+import { Client, Account, ID } from "appwrite";
 class Auth {
     client = new Client();
     account;
@@ -9,7 +9,7 @@ class Auth {
             .setProject(config.Project_id)
         this.account = new Account(this.client)
     }
-    async createAccount({name, mail, pass}) {
+    async createAccount({ name, mail, pass }) {
         try {
             const session = await this.account.create(ID.unique(), mail, pass, name)
             return session
@@ -17,9 +17,12 @@ class Auth {
             throw error;
         }
     }
-    async getLogIn({mail, pass}) {
+    async getLogIn({ mail, pass }) {
         try {
             const session = await this.account.createEmailPasswordSession(mail, pass)
+            if (session) {
+                localStorage.setItem('user', true);
+            }
             return session;
         } catch (error) {
             throw error
@@ -28,19 +31,22 @@ class Auth {
     async getLogOut() {
         try {
             const session = await this.account.deleteSessions()
+            if (session) {
+                localStorage.setItem('user', false);
+            }
             return session
         } catch (error) {
             throw error
         }
     }
-    async getCurrentUser(){
+    async getCurrentUser() {
         try {
-            const session=await this.account.get()
+            const session = await this.account.get()
             return session
         } catch (error) {
             throw error
         }
     }
 }
-const authService=new Auth();
+const authService = new Auth();
 export default authService

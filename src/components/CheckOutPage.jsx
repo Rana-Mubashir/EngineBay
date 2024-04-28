@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 const CheckoutPage = ({ }) => {
   const totalPrice = useSelector((state) => state.product.TotalPrice)
   const userdata = useSelector((state) => state.product.userdata);
-  const userMail = userdata.providerUid
+  const userMail = userdata.email
   const [error, setError] = useState('');
   const [country, setCountry] = useState('')
   const [city, setCity] = useState('')

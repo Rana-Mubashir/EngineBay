@@ -7,7 +7,7 @@ function CartBtn({ product, quantity }) {
     const cartQuantity = useSelector((state) => state.product.productsInCart)
     const dispatch = useDispatch();
     const userdata = useSelector((state) => state.product.userdata)
-    const usermail = userdata.providerUid;
+    const usermail = userdata.email;
     async function handlesubmit(documentId, userMail, quantity) {
         try {
             setLoader(true)

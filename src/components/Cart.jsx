@@ -12,7 +12,7 @@ function Cart() {
     const [loader, setLoader] = useState();
     const navigate = useNavigate();
     const userdata = useSelector((state) => state.product.userdata)
-    const usermail = userdata.providerUid
+    const usermail = userdata.email
     const cartQuantity = useSelector((state) => state.product.productsInCart)
     useEffect(() => {
         async function getProducts() {

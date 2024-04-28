@@ -15,11 +15,16 @@ function SignupForm() {
         try {
             setError('');
             setLoader(true);
+            const checkStorage = localStorage.getItem('user')
+            if (checkStorage === 'true') {
+                await authService.getLogOut();
+            }
             const session = await authService.createAccount(data);
             if (session) {
                 const session2 = await authService.getLogIn(data);
                 if (session2) {
-                    dispatch(login(session2));
+                    const crrUser=await authService.getCurrentUser();
+                    dispatch(login(crrUser));
                     navigate('/');
                 }
             }

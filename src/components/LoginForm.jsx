@@ -14,7 +14,7 @@ function LoginForm() {
     const [loader, setLoader] = useState(false);
     const [quantity, setQuantity] = useState(0);
     const userdata = useSelector((state) => state.product.userdata)
-    const usermail = userdata.providerUid
+    const usermail = userdata.email;
     const navigate = useNavigate();
     useEffect(() => {
         // purpose of this fucntion is to update cart icon on navbar ,when user login.
@@ -48,9 +48,16 @@ function LoginForm() {
         try {
             setError('')
             setLoader(true);
+            const checkStorage = localStorage.getItem('user')
+            if (checkStorage === 'true') {
+                await authService.getLogOut();
+            }
             const session = await authService.getLogIn(data);
             if (session) {
-                dispatch(login(session));
+                const crUser = await authService.getCurrentUser();
+                if (crUser) {
+                    dispatch(login(crUser));
+                }
             }
         } catch (error) {
             setLoader(false)
