@@ -63,7 +63,12 @@ const ProductPage = () => {
                                         </button>
                                     </div>
                                 </div>
-                                <p className='text-red-500 text-lg'>{user ? '' : 'Please log in to secure your cart items.'}</p>
+                                {
+                                    user ?
+                                    ''
+                                    :
+                                    <p className='text-red-500 text-lg animate-bounce'>{user ? '' : 'Please log in to secure your cart items.'}</p>
+                                }
                                 {
                                     user ?
                                         <CartBtn

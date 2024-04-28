@@ -80,7 +80,7 @@ function Cart() {
                                 product.map((eachProduct, index) =>
 
                                     <CartForm
-                                        key={index}
+                                        key={`${eachProduct.$id}-${index}`}
                                         product={eachProduct}
                                         quantity={quantity[index]}
                                         productId={productIdAtCart[index]}

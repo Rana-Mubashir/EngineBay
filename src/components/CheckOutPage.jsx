@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import databaseService from '../backend/database'
-import {onChangeCart} from '../store/productSlice'
-import {useNavigate} from 'react-router-dom'
+import { onChangeCart } from '../store/productSlice'
+import { useNavigate } from 'react-router-dom'
 const CheckoutPage = ({ }) => {
   const totalPrice = useSelector((state) => state.product.TotalPrice)
   const userdata = useSelector((state) => state.product.userdata);
@@ -12,23 +12,28 @@ const CheckoutPage = ({ }) => {
   const [city, setCity] = useState('')
   const [address, setAddress] = useState()
   const [phone, setPhone] = useState('')
-  const [confirmation,setConfirm]=useState('');
-  const dispatch=useDispatch();
-  const navigate=useNavigate();
- async function handleSubmit() {
-    if (country && city && address && phone && userMail) {
-      const session= await databaseService.emptyCart(userMail)
-      if(session){
-         setConfirm('Order confirmed,Check your email.');
-         dispatch(onChangeCart(0))
-         setTimeout(() => {
-          navigate('/');
-         },2000);
+  const [confirmation, setConfirm] = useState('');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  async function handleSubmit() {
+    setError('');
+    try {
+      if (country && city && address && phone && userMail) {
+        const session = await databaseService.emptyCart(userMail)
+        if (session) {
+          setConfirm('Order confirmed,Check your email.');
+          dispatch(onChangeCart(0))
+          setTimeout(() => {
+            navigate('/');
+          }, 2000);
+        }
       }
-    }
-    else {
-      setError("Required field ")
-      return false;
+      else {
+        setError("Required field ")
+        return false;
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
   return (
