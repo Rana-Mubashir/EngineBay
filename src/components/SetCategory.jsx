@@ -4,7 +4,7 @@ import ProductCard from './ProductCard'
 import Loader from './Loader'
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-function SetCategory({ category }) {
+function SetCategory({ category, relatedProductId, isrelatedProduct }) {
     const [products, setProducts] = useState([])
     const [loader, setLoader] = useState(true);
     const productName = useSelector((state) => state.product.productToFind)
@@ -31,11 +31,24 @@ function SetCategory({ category }) {
                             setProducts(filteredProducts)
                             setLoader(false)
                         } else {
-                            const filteredProducts = session.documents.filter((document) =>
+                            const categoryFilter = session.documents.filter((document) =>
                                 document.category === category
                             );
-                            setProducts(filteredProducts)
-                            setLoader(false)
+                            if (isrelatedProduct) {
+                                const filterProduct = categoryFilter.filter((document) =>
+                                    document.$id !== relatedProductId
+                                )
+                                console.log(filterProduct)
+                                if (filterProduct) {
+                                    setProducts(filterProduct)
+                                    setLoader(false)
+                                }
+                            }
+                            else {
+                                setProducts(categoryFilter)
+                                setLoader(false)
+                            }
+
                         }
                     }
                 }
@@ -44,7 +57,7 @@ function SetCategory({ category }) {
             }
         }
         getProducts();
-    }, [productName])
+    }, [productName, relatedProductId])
     return (
         <div className="">
             {
@@ -53,7 +66,7 @@ function SetCategory({ category }) {
                 ) : (
                     <div>
                         {products && products.length > 0 ? (
-                            <div className="flex justify-center items-center flex-wrap gap-20 p-10 border-4 border-black">
+                            <div className="flex justify-center items-center flex-wrap gap-20 p-10 ">
                                 {products.map((each) => (
                                     <ProductCard key={each.$id} product={each} />
                                 ))}
