@@ -15,6 +15,7 @@ function Cart() {
     const usermail = userdata.email
     const cartQuantity = useSelector((state) => state.product.productsInCart)
     useEffect(() => {
+        window.scrollTo(0, 0);
         async function getProducts() {
             try {
                 setLoader(true)

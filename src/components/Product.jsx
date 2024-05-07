@@ -12,6 +12,7 @@ const ProductPage = () => {
     const [quantity, setQuantity] = useState(1)
     const [loader, setLoader] = useState(true)
     useEffect(() => {
+        window.scrollTo(0, 0);
         async function gettingPost() {
             try {
                 const session = await databaseService.getProduct(slug);

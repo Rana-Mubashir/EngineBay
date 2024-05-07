@@ -49,6 +49,7 @@ function LoginForm() {
             setError('')
             setLoader(true);
             const checkStorage = localStorage.getItem('user')
+            console.log(checkStorage)
             if (checkStorage === 'true') {
                 await authService.getLogOut();
             }
