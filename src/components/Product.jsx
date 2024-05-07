@@ -94,7 +94,7 @@ const ProductPage = () => {
             </div>
             <div className="">
                 <div className="flex justify-center items-center m-5">
-                    <h1 className='text-5xl underline'>Related Products</h1>
+                    <h1 className='text-3xl md:text-5xl underline'>Related Products</h1>
                 </div>
                 <div className="">
                     {

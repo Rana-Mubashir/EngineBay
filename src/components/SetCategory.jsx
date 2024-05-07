@@ -7,7 +7,10 @@ import { useSelector } from 'react-redux'
 function SetCategory({ category, relatedProductId, isrelatedProduct }) {
     const [products, setProducts] = useState([])
     const [loader, setLoader] = useState(true);
-    const productName = useSelector((state) => state.product.productToFind)
+    let productName = useSelector((state) => state.product.productToFind)
+    if(isrelatedProduct){
+        productName=''
+    }
     useEffect(() => {
         async function getProducts() {
             try {
