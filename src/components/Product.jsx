@@ -73,19 +73,30 @@ const ProductPage = () => {
                                         user ?
                                             ''
                                             :
-                                            <p className='text-red-500 text-lg animate-bounce'>{user ? '' : 'Please log in first to secure your cart items.'}</p>
+                                            <p className='text-red-500 text-lg animate-bounce'>Please log in first to secure your cart items.</p>
                                     }
                                     {
                                         user ?
-                                            <CartBtn
-                                                product={product}
-                                                quantity={quantity}
-                                            />
+                                            <>
+                                                <CartBtn
+                                                    product={product}
+                                                    quantity={quantity}
+                                                />
+                                                <div className="flex justify-center items-center m-5">
+                                                    <h1 className='text-3xl md:text-5xl underline'>Related Products</h1>
+                                                </div>
+                                            </>
                                             :
-                                            <button className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                                            >
-                                                Add to Cart
-                                            </button>
+                                            <>
+                                                <button className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                                >
+                                                    Add to Cart
+                                                </button>
+                                                <div className="flex justify-center items-center m-5">
+                                                    <h1 className='text-3xl md:text-5xl underline'>Related Products</h1>
+                                                </div>
+                                            </>
+
                                     }
 
                                 </div>
@@ -94,9 +105,6 @@ const ProductPage = () => {
                 }
             </div>
             <div className="">
-                <div className="flex justify-center items-center m-5">
-                    <h1 className='text-3xl md:text-5xl underline'>Related Products</h1>
-                </div>
                 <div className="">
                     {
                         loader ?
