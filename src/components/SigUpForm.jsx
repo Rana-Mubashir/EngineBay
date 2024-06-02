@@ -23,19 +23,17 @@ function SignupForm() {
             if (session) {
                 const session2 = await authService.getLogIn(data);
                 if (session2) {
-                    const crrUser=await authService.getCurrentUser();
+                    const crrUser = await authService.getCurrentUser();
                     dispatch(login(crrUser));
                     navigate('/');
                 }
             }
         } catch (error) {
             setLoader(false)
-            console.log(error)
             setError(error.message)
         }
     }
     return (
-
         <div>
             {
                 loader ?
@@ -87,7 +85,7 @@ function SignupForm() {
                                             })}
                                         />
                                     </div>
-                                   
+
                                     <div>
                                         <button
                                             type="submit"

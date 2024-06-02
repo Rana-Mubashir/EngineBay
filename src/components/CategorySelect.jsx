@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import {  NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { setProductToFind } from '../store/productSlice';
 const CategoryBar = () => {
     const dispatch = useDispatch();
@@ -36,37 +36,37 @@ const CategoryBar = () => {
                         className={({ isActive }) =>
                             ` ${isActive ? "text-yellow-700" : "text-white"} " p-5 sm:p-2 border-white border-2 rounded font-semibold hover:text-gray-300 `
                         }
-                        onClick={()=>emptySearchProduct()}
+                        onClick={() => emptySearchProduct()}
                     >
                         All
                     </NavLink>
-                   
+
                     <NavLink
                         to="/decoreparts"
                         className={({ isActive }) =>
                             ` ${isActive ? "text-yellow-700" : "text-white"} "  py-5 sm:p-2 border-white border-2 rounded font-semibold hover:text-gray-300 `
                         }
-                        onClick={()=>emptySearchProduct()}
+                        onClick={() => emptySearchProduct()}
                     >
                         Decoration
                     </NavLink>
-                   
+
                     <NavLink
                         to="/bodyparts"
                         className={({ isActive }) =>
                             ` ${isActive ? "text-yellow-700" : "text-white"} " text-center p-2 border-white border-2 rounded font-semibold hover:text-gray-300`
                         }
-                        onClick={()=>emptySearchProduct()}
+                        onClick={() => emptySearchProduct()}
                     >
                         Body Parts
                     </NavLink>
-                   
+
                     <NavLink
                         to="/spareparts"
                         className={({ isActive }) =>
                             ` ${isActive ? "text-yellow-700" : "text-white"} " text-center p-2 border-white border-2 rounded font-semibold hover:text-gray-300 `
                         }
-                        onClick={()=>emptySearchProduct()}
+                        onClick={() => emptySearchProduct()}
                     >
                         Cleaning Items
                     </NavLink>
@@ -96,13 +96,13 @@ const CategoryBar = () => {
                                 X
                             </div>
                             <h1 className='text-xl underline '>Popular Searches</h1>
-                            {popularSearches.map((search, index) => (
+                            {popularSearches.map((value, index) => (
                                 <div
                                     key={index}
                                     className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
                                     onMouseEnter={(e) => setProductName(e.target.innerText)}
                                     onMouseLeave={() => setProductName('')}
-                                    onClick={() => submitName(search)}
+                                    onClick={() => submitName(value)}
                                 >
                                     {search}
                                 </div>

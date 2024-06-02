@@ -21,7 +21,7 @@ function LoginForm() {
         async function getCartQuantity() {
             try {
                 const session = await databaseService.cartDetails();
-                if (session && usermail) {
+                if (session) {
                     const data = session.documents.filter((document) => document.userMail === usermail)
                     if (data.length > 0) {
                         data.map((item) => {
@@ -32,11 +32,14 @@ function LoginForm() {
                         navigate('/')
                     }
                 }
+
             } catch (error) {
                 console.log(error)
             }
         }
-        getCartQuantity();
+        if (usermail) {
+            getCartQuantity();
+        }
     }, [usermail])
     useEffect(() => {
         if (quantity) {
@@ -49,7 +52,6 @@ function LoginForm() {
             setError('')
             setLoader(true);
             const checkStorage = localStorage.getItem('user')
-            console.log(checkStorage)
             if (checkStorage === 'true') {
                 await authService.getLogOut();
             }
@@ -62,7 +64,6 @@ function LoginForm() {
             }
         } catch (error) {
             setLoader(false)
-            console.log(error);
             setError(error.message)
         }
     }

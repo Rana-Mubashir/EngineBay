@@ -62,7 +62,11 @@ class Database {
             throw error
         }
     }
+
+
     // add to cart functionality
+
+    
     async addCart(documentId, userMail, quantity) {
         try {
             const session = await this.database.createDocument(

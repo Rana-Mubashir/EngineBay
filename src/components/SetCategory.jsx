@@ -8,30 +8,27 @@ function SetCategory({ category, relatedProductId, isrelatedProduct }) {
     const [products, setProducts] = useState([])
     const [loader, setLoader] = useState(true);
     let productName = useSelector((state) => state.product.productToFind)
-    if(isrelatedProduct){
-        productName=''
+    if (isrelatedProduct) {
+        productName = ''
     }
     useEffect(() => {
         async function getProducts() {
             try {
                 setLoader(true)
                 const session = await databaseService.listAllProducts()
-                if (productName) {
-                    const filteredProducts = session.documents.filter((document) =>
-                        document.name.toLowerCase() === productName.toLowerCase()
-                    );
-                    if (filteredProducts) {
-                        setProducts(filteredProducts);
-                        setLoader(false)
+                if (session) {
+                    if (productName) {
+                        const filteredProducts = session.documents.filter((document) =>
+                            document.name.toLowerCase() === productName.toLowerCase()
+                        );
+                        if (filteredProducts) {
+                            setProducts(filteredProducts);
+                            setLoader(false)
+                        }
                     }
-                }
-                else {
-                    if (session) {
+                    else {
                         if (Array.isArray(category)) {
-                            const filteredProducts = session.documents.filter((document) =>
-                                category.includes(document.category)
-                            );
-                            setProducts(filteredProducts)
+                            setProducts(session.documents)
                             setLoader(false)
                         } else {
                             const categoryFilter = session.documents.filter((document) =>
@@ -41,7 +38,6 @@ function SetCategory({ category, relatedProductId, isrelatedProduct }) {
                                 const filterProduct = categoryFilter.filter((document) =>
                                     document.$id !== relatedProductId
                                 )
-                                console.log(filterProduct)
                                 if (filterProduct) {
                                     setProducts(filterProduct)
                                     setLoader(false)
@@ -51,7 +47,6 @@ function SetCategory({ category, relatedProductId, isrelatedProduct }) {
                                 setProducts(categoryFilter)
                                 setLoader(false)
                             }
-
                         }
                     }
                 }
